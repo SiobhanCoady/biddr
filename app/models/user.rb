@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :bids, dependent: :destroy
+  has_many :bids, dependent: :nullify
+  has_many :auctions, dependent: :nullify
 
   has_secure_password
 

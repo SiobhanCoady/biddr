@@ -1,7 +1,8 @@
 FactoryGirl.define do
   factory :bid do
-    amount 1
-    auction nil
-    user nil
+    association :auction, factory: :auction
+    association :user, factory: :user
+
+    amount 10
   end
 end

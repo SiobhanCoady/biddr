@@ -1,17 +1,20 @@
-25.times do
-  Auction.create  title: Faker::Commerce.product_name,
-                  details: Faker::Hipster.paragraph,
-                  ends_on: Faker::Date.forward(90),
-                  reserve_price: rand(500),
-                  current_price: 0
-end
-
 10.times do
   User.create   first_name: Faker::Name.first_name,
                 last_name: Faker::Name.last_name,
                 email: Faker::Internet.email,
                 password_digest: '12345678'
 end
+
+25.times do
+  user = User.all.sample
+  Auction.create  title: Faker::Commerce.product_name,
+                  details: Faker::Hipster.paragraph,
+                  ends_on: Faker::Date.forward(90),
+                  reserve_price: rand(500),
+                  current_price: 1,
+                  user_id: user.id
+end
+
 
 auctions = Auction.all
 

@@ -1,4 +1,5 @@
 class AuctionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :find_auction, only: [:show, :edit]
 
   def index
@@ -11,7 +12,7 @@ class AuctionsController < ApplicationController
 
   def create
     @auction = Auction.new auction_params
-    # @auction.user = current_user
+    @auction.user = current_user
     if @auction.save
       flash[:notice] = 'Auction created!'
       redirect_to auction_path(@auction)
