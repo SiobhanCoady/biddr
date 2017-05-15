@@ -1,0 +1,7 @@
+<%= simple_form_for @auction do |f| %>
+  <%= f.input :title %>
+  <%= f.input :details, required: false %>
+  <%= f.input :ends_on %>
+  <%= f.input :reserve_price %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
