@@ -12,7 +12,8 @@ end
                   ends_on: Faker::Date.forward(90),
                   reserve_price: rand(500),
                   current_price: 1,
-                  user_id: user.id
+                  user_id: user.id,
+                  aasm_state: :published
 end
 
 

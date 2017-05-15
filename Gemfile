@@ -32,10 +32,14 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 1.10'
 
 gem 'faker', github: 'stympy/faker'
-gem 'cancancan', '~> 1.10'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails'
 gem 'simple_form'
+gem 'jquery-ui-rails'
+gem 'simple-form-datepicker'
+gem 'momentjs-rails', '~> 2.9',  :github => 'derekprior/momentjs-rails'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'aasm'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

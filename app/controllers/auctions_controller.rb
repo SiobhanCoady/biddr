@@ -1,9 +1,10 @@
 class AuctionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :find_auction, only: [:show, :edit]
+  before_action :find_auction, only: [:show, :update]
 
   def index
-    @auctions = Auction.all
+    # @auctions = Auction.where('aasm_state = ? OR aasm_state = ?', 'published', 'reserve_met').order(created_at: :desc)
+    @auctions = Auction.all.order(created_at: :desc)
   end
 
   def new
@@ -25,6 +26,12 @@ class AuctionsController < ApplicationController
   def show
     @bid = Bid.new
     @bids = Bid.where(auction_id: @auction.id).order(date: :desc)
+  end
+
+  def update
+    @auction.publish
+    @auction.save
+    redirect_to auction_path(@auction)
   end
 
   private
