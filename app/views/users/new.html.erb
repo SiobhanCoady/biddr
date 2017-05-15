@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-3 hidden-xs"></div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <h1>Sign Up</h1>
+
+      <% if @user.errors.any? %>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= simple_form_for @user do |f| %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :email %>
+        <%= f.input :password, required: true %>
+        <%= f.input :password_confirmation, required: true %>
+        <%= f.submit 'Sign Up', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-3 hidden-xs"></div>
+  </div>
+</div>

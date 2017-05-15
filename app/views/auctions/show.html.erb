@@ -1,5 +1,15 @@
 <h1><%= @auction.title %></h1>
 <div><%= @auction.details %></div>
-<div><p>Ends On:<%= @auction.ends_on %></p></div>
-<div>Current Price</div>
+<div><p>Ends On: <%= @auction.ends_on %></p></div>
+<div>Current Price: $<%= @auction.current_price %></div>
 <div>Reserve Price Not Met</div>
+
+<%= simple_form_for [@auction, @bid] do |f| %>
+  <%= f.input :amount %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
+<h3>Previous Bids</h3>
+<% @bids.each do |bid| %>
+    <p>$<%= bid.amount %> on <%= bid.date %></p>
+<% end %>

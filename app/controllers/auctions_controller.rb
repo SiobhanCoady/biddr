@@ -22,6 +22,8 @@ class AuctionsController < ApplicationController
   end
 
   def show
+    @bid = Bid.new
+    @bids = Bid.where(auction_id: @auction.id).order(date: :desc)
   end
 
   private

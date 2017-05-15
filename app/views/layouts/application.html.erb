@@ -31,9 +31,18 @@
           <hr class="hidden-lg hidden-md hidden-sm">
 
           <ul class="nav navbar-nav navbar-right">
-
+            <% if user_signed_in? %>
+              <li class="navbar-text hello-user">
+                <span>Hello, <%= current_user.first_name %></span>
+              </li>
+              <li><%= link_to "Logout", sessions_path, method: :delete,
+                       data: {confirm: "Are you sure you want to log out?"}%></li>
+            <% else %>
+              <li><%= link_to "Sign Up", new_user_path %></li>
+              <li><%= link_to "Login", new_session_path %></li>
+            <% end %>
           </ul>
-          
+
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
