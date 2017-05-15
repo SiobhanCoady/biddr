@@ -2,10 +2,13 @@
 <div><%= @auction.details %></div>
 <div><p>Ends On: <%= @auction.ends_on %></p></div>
 <div>Current Price: $<%= @auction.current_price %></div>
-<div>Reserve Price Not Met</div>
+<% if @auction.aasm_state == 'reserve_met' %>
+  <div>Reserve Met</div>
+<% else %>
+  <div>Reserve Price Not Met</div>
+<% end %>
 
 <% if current_user == @auction.user && @auction.aasm_state == 'draft' %>
-  <!-- <button class="btn btn-primary">Publish</button> -->
   <%= button_to 'Publish', auction_path, method: :patch, class: 'btn btn-primary' %>
 <% end %>
 
@@ -16,5 +19,5 @@
 
 <h3>Previous Bids</h3>
 <% @bids.each do |bid| %>
-    <p>$<%= bid.amount %> on <%= bid.date %></p>
+    <p>$<%= bid.amount %> on <%= bid.date %> - <%= bid.user.first_name %> <%= bid.user.last_name %></p>
 <% end %>

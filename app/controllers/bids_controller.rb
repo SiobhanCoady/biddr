@@ -9,8 +9,15 @@ class BidsController < ApplicationController
     @bid.date = Time.zone.now
     @bid.user = current_user
 
+    if @bid.amount >= @auction.reserve_price
+      @auction.meet_reserve
+      @auction.save
+    end
+
     if @bid.user.id == @auction.user_id
       redirect_to auction_path(@auction), alert: 'You cannot bid on your own auction'
+    elsif @bid.amount <= @auction.current_price
+      redirect_to auction_path(@auction), alert: 'Bid amount must be greater than current price'
     elsif @bid.save
       @auction.current_price = @bid.amount
       @auction.save
