@@ -5,7 +5,7 @@
 
       <h3>Auctions this user has created:</h3>
       <% @user.auctions.each do |a| %>
-      <h4><%= link_to a.title, auction_path(a) %></h4>
+      <h4><%= link_to a.title, auction_path(a) %> - <%= a.aasm_state %></h4>
       <hr>
       <% end %>
 

@@ -1,21 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 col-lg-12 col-xl-12">
-      <h1><%= @auction.title %></h1>
-      <div><%= @auction.details %></div>
-      <div><p>Ends On: <%= @auction.ends_on %></p></div>
-      <div>Current Price: $<%= @auction.current_price %></div>
-      <% if @auction.aasm_state == 'reserve_met' %>
-      <div>Reserve Met</div>
-      <% else %>
-      <div>Reserve Price Not Met</div>
-      <% end %>
-
-      <% if current_user == @auction.user && @auction.aasm_state == 'draft' %>
-      <%= button_to 'Publish', auction_path, method: :patch, class: 'btn btn-primary' %>
-      <% end %>
-
-      <p>
+      <h1>
+        <%= @auction.title %>
         <% if user_signed_in? %>
           <% if @auction.tracked_by?(current_user) %>
             <%= link_to(
@@ -27,16 +14,40 @@
             <%= link_to fa_icon('eye'), auction_trackings_path(@auction), method: :post %>
           <% end %>
         <% end %>
-      </p>
+      </h1>
+    </div>
+    <div class="col-md-9 col-lg-9 col-xl-9">
+      <p><%= @auction.details %></p>
+      <p>Ends On: <%= @auction.ends_on %></p>
+    </div>
+    <div class="col-md-3 col-lg-3 col-xl-3">
+      <p>Current Price: $<%= @auction.current_price %></p>
+      <% if @auction.aasm_state == 'reserve_met' %>
+        <p>Reserve Met</p>
+      <% else %>
+        <p>Reserve Price Not Met</p>
+      <% end %>
 
-      <%= simple_form_for [@auction, @bid] do |f| %>
-      <%= f.input :amount %>
-      <%= f.submit class: 'btn btn-primary' %>
+      <% if current_user == @auction.user && @auction.aasm_state == 'draft' %>
+        <%= button_to 'Publish', auction_path, method: :patch, class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <% if user_signed_in? %>
+        <%= simple_form_for [@auction, @bid] do |f| %>
+          <%= f.input :amount, input_html: { style: 'width: 30%' } %>
+          <%= f.submit class: 'btn btn-primary' %>
+        <% end %>
+      <% else %>
+        <p><%= link_to "Login to bid!", new_session_path %></p>
       <% end %>
 
       <h3>Previous Bids</h3>
       <% @bids.each do |bid| %>
-      <p>$<%= bid.amount %> on <%= standard_date_format(bid.date) %> - <%= link_to "#{bid.user.first_name} #{bid.user.last_name}", user_path(bid.user) %></p>
+        <p>$<%= bid.amount %> on <%= standard_date_format(bid.date) %> - <%= link_to "#{bid.user.first_name} #{bid.user.last_name}", user_path(bid.user) %></p>
       <% end %>
 
     </div>

@@ -3,8 +3,8 @@ class AuctionsController < ApplicationController
   before_action :find_auction, only: [:show, :update]
 
   def index
-    # @auctions = Auction.where('aasm_state = ? OR aasm_state = ?', 'published', 'reserve_met').order(created_at: :desc)
-    @auctions = Auction.all.order(created_at: :desc)
+    @auctions = Auction.where('aasm_state = ? OR aasm_state = ?', 'published', 'reserve_met').order(created_at: :desc)
+    # @auctions = Auction.all.order(created_at: :desc)
   end
 
   def new
