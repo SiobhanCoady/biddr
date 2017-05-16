@@ -2,6 +2,9 @@ class Auction < ApplicationRecord
   has_many :bids, dependent: :destroy
   belongs_to :user
 
+  has_many :trackings, dependent: :destroy
+  has_many :users, through: :trackings
+
   validates(:title, { presence: true,
                       uniqueness: true })
   validates(:details, { presence: true, length: { minimum: 5 } })
@@ -46,6 +49,14 @@ class Auction < ApplicationRecord
     event :reoffer do
       transitions from: :cancelled, to: :draft
     end
+  end
+
+  def tracked_by?(user)
+    trackings.exists?(user: user)
+  end
+
+  def tracking_for(user)
+    trackings.find_by(user: user)
   end
 
   private

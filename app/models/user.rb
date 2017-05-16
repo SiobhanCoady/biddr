@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :bids, dependent: :nullify
   has_many :auctions, dependent: :nullify
 
+  has_many :trackings, dependent: :destroy
+  has_many :tracked_auctions, through: :trackings, source: :auction
+
   has_secure_password
 
   validates :first_name, presence: true

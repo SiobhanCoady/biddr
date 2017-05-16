@@ -15,6 +15,20 @@
       <%= button_to 'Publish', auction_path, method: :patch, class: 'btn btn-primary' %>
       <% end %>
 
+      <p>
+        <% if user_signed_in? %>
+          <% if @auction.tracked_by?(current_user) %>
+            <%= link_to(
+              fa_icon('eye-slash'),
+              tracking_path(@auction.tracking_for(current_user)),
+              method: :delete
+            ) %>
+          <% else %>
+            <%= link_to fa_icon('eye'), auction_trackings_path(@auction), method: :post %>
+          <% end %>
+        <% end %>
+      </p>
+
       <%= simple_form_for [@auction, @bid] do |f| %>
       <%= f.input :amount %>
       <%= f.submit class: 'btn btn-primary' %>

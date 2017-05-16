@@ -39,6 +39,7 @@
                 <span>Hello, <%= current_user.first_name %>!</span>
               </li>
               <li><%= link_to "My Auctions", user_path(current_user) %></li>
+              <li><%= link_to "Tracked Auctions", user_trackings_path(current_user) %></li>
               <li><%= link_to "Logout", sessions_path, method: :delete,
                        data: {confirm: "Are you sure you want to log out?"}%></li>
             <% else %>
