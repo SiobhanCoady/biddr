@@ -34,6 +34,16 @@ class AuctionsController < ApplicationController
     redirect_to auction_path(@auction)
   end
 
+  def with_bids
+    a = Auction.all.order(created_at: :desc)
+    @auctions = []
+    a.each do |auction|
+      if auction.bids != []
+        @auctions.push(auction)
+      end
+    end
+  end
+
   private
 
     def find_auction

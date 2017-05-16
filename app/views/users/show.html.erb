@@ -1,0 +1,6 @@
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+
+<h3>Auctions this user has bid on:</h3>
+<% @auctions.each do |auction| %>
+    <p><%= link_to auction.title, auction_path(auction) %></p>
+<% end %>

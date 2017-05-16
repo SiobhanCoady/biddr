@@ -1,6 +1,6 @@
 module ApplicationHelper
   def standard_date_format(date)
-    date.strftime('%Y-%B-%d')
+    date.strftime('%B %d %Y')
   end
 
   def bootstrap_class_for(flash_type)

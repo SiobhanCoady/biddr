@@ -19,5 +19,5 @@
 
 <h3>Previous Bids</h3>
 <% @bids.each do |bid| %>
-    <p>$<%= bid.amount %> on <%= bid.date %> - <%= bid.user.first_name %> <%= bid.user.last_name %></p>
+    <p>$<%= bid.amount %> on <%= standard_date_format(bid.date) %> - <%= link_to "#{bid.user.first_name} #{bid.user.last_name}", user_path(bid.user) %></p>
 <% end %>

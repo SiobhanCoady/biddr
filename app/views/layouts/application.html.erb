@@ -26,6 +26,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="/auctions/new">Create Auction</a></li>
+            <% if user_signed_in? %>
+              <li><a href="/auctions/with_bids">Auctions with Bids</a></li>
+            <% end %>
           </ul>
 
           <hr class="hidden-lg hidden-md hidden-sm">
