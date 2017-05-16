@@ -10,7 +10,7 @@ RSpec.describe AuctionsController, type: :controller do
       auction
       auction1
       get :index
-      expect(assigns(:auctions)).to eq([auction, auction1])
+      expect(assigns(:auctions)).to eq([auction1, auction])
     end
 
     it 'renders the index view' do

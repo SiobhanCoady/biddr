@@ -3,6 +3,12 @@
     <div class="col-md-12 col-lg-12 col-xl-12">
       <h1><%= @user.first_name %> <%= @user.last_name %></h1>
 
+      <h3>Auctions this user has created:</h3>
+      <% @user.auctions.each do |a| %>
+      <h4><%= link_to a.title, auction_path(a) %></h4>
+      <hr>
+      <% end %>
+
       <h3>Auctions this user has bid on:</h3>
       <% @auctions.each do |auction| %>
       <h4><%= link_to auction.title, auction_path(auction) %></h4>
