@@ -1,6 +1,13 @@
-<h1>All Auctions with Bids</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <h1>All Auctions with Bids</h1>
 
-<% @auctions.each do |auction| %>
-    <h4><%= link_to auction.title, auction_path(auction) %></h4>
-    <hr>
-<% end %>
+      <% @auctions.each do |auction| %>
+      <h4><%= link_to auction.title, auction_path(auction) %></h4>
+      <hr>
+      <% end %>
+
+    </div>
+  </div>
+</div>
